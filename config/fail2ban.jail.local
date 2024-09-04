@@ -1,0 +1,8 @@
+[nginx-limit]
+enabled  = true
+filter   = nginx-limit
+action   = iptables[name=NGINX-LIMIT, port=http, protocol=tcp]
+logpath  = /var/log/nginx/access.log
+maxretry = 10  # Number of allowed requests
+findtime = 60  # Time window in seconds (60 seconds)
+bantime  = 60  # Ban duration in seconds (60 seconds)
