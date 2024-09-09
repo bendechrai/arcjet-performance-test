@@ -17,11 +17,12 @@ This project aims to assess the performance implications of implementing securit
 
 The repository includes multiple configurations:
 
-- **Nginx Baseline:** Nginx as a reverse proxy without additional protections.
+- **Nginx Baseline:** Nginx as without additional protections.
+- **Arcjet Rate Limiting:** Nginx as without additional protections, calling an Arcjet protected route.
+- **Arcjet Bot Protection:** Nginx as without additional protections, calling an Arcjet protected route.
 - **Nginx Rate Limiting:** Nginx configured with rate limiting settings.
 - **Nginx Bot Protection:** Nginx configured to block requests from known bots.
 - **Fail2Ban:** Integrated with Nginx to monitor logs and ban IPs based on defined patterns.
-- **Arcjet Rate Limiting and Bot Detection:** In-app protections directly integrated into the Next.js application.
 
 ## Getting Started
 
@@ -39,6 +40,14 @@ git clone https://github.com/arcjet/nextjs-performance-test.git
 cd nextjs-performance-test
 ```
 
+### Creating an Arcjet Account in the testing environment
+
+Head to https://app.arcjettest.com/ and create an account, aa new site, and get your SDK key.
+
+### Environment Setup
+
+Copy the `nextjs-app/.env.local.example` file to `nextjs-app/.env.local` and update the necessary environment variables.
+
 ### Building the Docker Image
 
 Build the Docker image using the provided Dockerfile:
@@ -52,7 +61,9 @@ docker build -t nextjs-performance-test .
 Run the Docker container and expose the necessary ports:
 
 ```bash
-docker run -d --name nextjs-performance-container -p 8080:80 nextjs-performance-test
+docker run -d --name nextjs-performance-container -p 8080:80 \
+  --env-file nextjs-app/.env.local \
+  nextjs-performance-test
 ```
 
 This command will start the Next.js app, Nginx, and Fail2Ban with the specified configurations and begin running the performance tests as defined in the `script.sh`.
@@ -69,29 +80,16 @@ To deploy the application on Fly.io for testing in a cloud environment:
 
 2. **Create and Launch the Application:**
 
+   As we don't have test deployments in Fly, we'll connect from the
+   IAD region in Fly to the IAD region in AWS, so ensure we use a
+   close Arcjet endpoint.
+
    ```bash
-   flyctl launch
+   flyctl launch --region iad 
    ```
 
    Follow the prompts to set up your app, selecting a region that aligns with Arcjet’s endpoint locations for optimal testing.
 
-3. **Deploy the Application:**
+3. **Monitor Logs and Results:**
 
-   ```bash
-   flyctl deploy
-   ```
-
-4. **Monitor Logs and Results:**
-
-   Use Fly.io’s monitoring tools to view logs and performance metrics. The results will be similar to the local tests, allowing you to compare performance between local and cloud environments.
-
-## Understanding the Results
-
-The test outputs will include key performance metrics such as:
-
-- **Response Times:** How quickly the server responds under load.
-- **Throughput:** The number of requests handled per second.
-- **Resource Usage:** CPU and memory utilization during the tests.
-- **Error Rates:** Incidences of failed requests or timeouts.
-
-These metrics will help you evaluate the impact of different security configurations on your Next.js application.
+   Use Fly.io’s monitoring tools to view logs and performance metrics. The results will appear in the Live Logs section.
