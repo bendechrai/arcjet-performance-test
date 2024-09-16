@@ -4,7 +4,7 @@
 npm start &
 
 # Allow Next.js app to start up fully
-sleep 5
+sleep 2
 
 # Function to run wrk tests
 run_test() {
@@ -13,7 +13,8 @@ run_test() {
     echo "---"
     echo "Test: $test_name"
     echo ""
-    wrk -t12 -c40 -d30s $url
+    # wrk -t2 -c2 -d5s -H "User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/116.0.0.0 Safari/537.36" $url
+    ab -n 100 -c 1 -H "User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/116.0.0.0 Safari/537.36" $url
     echo "---"
     echo ""
 }
@@ -29,30 +30,29 @@ check_service() {
     fi
 }
 
-# Start Nginx with the baseline configuration and run tests
-cp /testing-config/nginx-rate-limit.conf /etc/nginx/nginx.conf
-check_service nginx start
-run_test "Nginx Baseline - Unprotected" "http://localhost:8080/api/unprotected"
-run_test "Arcjet Rate Limiting" "http://localhost:8080/api/rate-limit"
-run_test "Arcjet Bot Protection" "http://localhost:8080/api/bot-detect"
+# # Start Nginx with the baseline configuration and run tests
+# cp /testing-config/nginx-rate-limit.conf /etc/nginx/nginx.conf
+# check_service nginx start
+# run_test "Nginx Baseline - Unprotected" "http://localhost:8080/api/unprotected?nginx-baseline"
 
-# Configure Nginx for rate limiting and restart, then run tests
-cp /testing-config/nginx-rate-limit.conf /etc/nginx/nginx.conf
-check_service nginx restart
-run_test "Nginx Rate Limiting" "http://localhost:8080/api/unprotected"
+# # Test the Arcjet Rate Limiting against the default Nginx configuration
+# run_test "Arcjet Rate Limiting" "http://localhost:8080/api/rate-limit"
 
-# Configure Nginx for bot protection and restart, then run tests
-cp /testing-config/nginx-bot-protect.conf /etc/nginx/nginx.conf
-check_service nginx restart
-run_test "Nginx Bot Protection" "http://localhost:8080/api/unprotected"
+# # Wait a few seconds for any block cache to expire
+# sleep 2
 
-# Configure for Fail2Ban tests
-cp /testing-config/nginx-fail2ban.conf /etc/nginx/nginx.conf
-check_service nginx restart
-cp /testing-config/fail2ban-nginx-limit.conf /etc/fail2ban/filter.d/nginx-limit.conf
-cp /testing-config/fail2ban.jail.local /etc/fail2ban/jail.local
-check_service fail2ban start
-run_test "Fail2Ban Rate Limiting" "http://localhost:8080/api/unprotected"
+# # Test the Arcjet Bot Protection against the default Nginx configuration
+# run_test "Arcjet Bot Protection" "http://localhost:8080/api/bot-detect"
+
+# # Configure Nginx for rate limiting and restart, then run tests
+# cp /testing-config/nginx-rate-limit.conf /etc/nginx/nginx.conf
+# check_service nginx restart
+# run_test "Nginx Rate Limiting" "http://localhost:8080/api/unprotected?nginx-rate-limit"
+
+# # Configure Nginx for bot protection and restart, then run tests
+# cp /testing-config/nginx-bot-protect.conf /etc/nginx/nginx.conf
+# check_service nginx restart
+# run_test "Nginx Bot Protection" "http://localhost:8080/api/unprotected?nginx-bot-protect"
 
 # Keep the container running
 tail -f /dev/null

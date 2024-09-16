@@ -1,9 +1,9 @@
 # Use a lightweight Linux base image
 FROM debian:latest
 
-# Install necessary packages including Nginx, Fail2Ban, Node.js, and npm
+# Install necessary packages including Nginx, Node.js, npm, and load testing tools wrk and ab
 RUN apt-get update \
- && apt-get install -y nginx fail2ban curl nodejs npm wrk \
+ && apt-get install -y nginx iptables curl nodejs npm wrk apache2-utils \
  && apt-get clean
 
 # Set the working directory for Nginx configurations
@@ -29,4 +29,5 @@ COPY start.sh /start.sh
 RUN chmod +x /start.sh
 
 # Start Nginx, Fail2Ban, and Next.js app using a custom startup script
+USER root
 CMD ["/start.sh"]

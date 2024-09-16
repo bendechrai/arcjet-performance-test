@@ -1,14 +1,14 @@
 # Next.js Performance Test
 
-This repository contains a Dockerized setup for testing the performance of various rate limiting and bot detection configurations using Next.js, Nginx, Fail2Ban, and Arcjet. The tests are designed to evaluate and compare the effectiveness and impact of different security measures, both locally and in cloud environments like Fly.io, where Arcjet has endpoints available.
+This repository contains a Dockerized setup for testing the performance of various rate limiting and bot detection configurations using Next.js, Nginx, and Arcjet. The tests are designed to evaluate and compare the effectiveness and impact of different security measures, both locally and in cloud environments like Fly.io, where Arcjet has endpoints available.
 
 ## Overview
 
-This project aims to assess the performance implications of implementing security measures directly in a Next.js application using Arcjet versus traditional network-level tools like Nginx and Fail2Ban. The configurations are tested locally within a Docker environment and can be extended to Fly.io for cloud-based testing.
+This project aims to assess the performance implications of implementing security measures directly in a Next.js application using Arcjet versus traditional network-level tools like Nginx. The configurations are tested locally within a Docker environment and can be extended to Fly.io for cloud-based testing.
 
 ## Features
 
-- **Automated Setup:** A Docker environment that automatically configures and runs tests for Nginx, Fail2Ban, and Arcjet.
+- **Automated Setup:** A Docker environment that automatically configures and runs tests for Nginx and Arcjet.
 - **Scripted Performance Testing:** Utilizes `wrk` for load testing to gather metrics on response times, throughput, and resource usage.
 - **Configurable:** Easily switch between different configurations to test unprotected, Arcjet-protected, and traditional security setups.
 - **Cloud-Ready:** Designed for deployment on Fly.io to test in environments where Arcjet has active endpoints.
@@ -22,7 +22,6 @@ The repository includes multiple configurations:
 - **Arcjet Bot Protection:** Nginx as without additional protections, calling an Arcjet protected route.
 - **Nginx Rate Limiting:** Nginx configured with rate limiting settings.
 - **Nginx Bot Protection:** Nginx configured to block requests from known bots.
-- **Fail2Ban:** Integrated with Nginx to monitor logs and ban IPs based on defined patterns.
 
 ## Getting Started
 
@@ -66,7 +65,7 @@ docker run -d --name nextjs-performance-container -p 8080:80 \
   nextjs-performance-test
 ```
 
-This command will start the Next.js app, Nginx, and Fail2Ban with the specified configurations and begin running the performance tests as defined in the `script.sh`.
+This command will start the Next.js app, and Nginx with the specified configurations and begin running the performance tests as defined in the `script.sh`.
 
 ### Deploying to Fly.io
 

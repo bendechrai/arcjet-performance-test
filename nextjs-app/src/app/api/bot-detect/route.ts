@@ -6,7 +6,7 @@ const aj = arcjet({
   rules: [
     detectBot({
       mode: "LIVE",
-      block: ["AUTOMATED"], // Only block clients we're sure are automated bots
+      allow: [], // Allow no known bots
     })
   ]
 });
