@@ -29,11 +29,11 @@ check_service() {
 }
 
 # Configure Nginx for baseline configuration and restart
-sudo cp ./config/nginx-rate-limit.conf /etc/nginx/nginx.conf
+sudo cp ./config/nginx.conf /etc/nginx/nginx.conf
 check_service nginx restart
 
 # Run baseline test against the default Nginx configuration
-run_test "Nginx Baseline from Browser" "http://localhost:8080/api/unprotected?nginx-baseline" $UA_BROWSER
+run_test "Nginx Baseline from Browser" "http://localhost:8080/api/unprotected" $UA_BROWSER
 
 # Run Arcjet Rate Limiting against the default Nginx configuration
 run_test "Arcjet Rate Limiting from Browser" "http://localhost:8080/api/rate-limit" $UA_BROWSER
@@ -49,12 +49,12 @@ sudo cp ./config/nginx-rate-limit.conf /etc/nginx/nginx.conf
 check_service nginx restart
 
 # Run tests against the Nginx rate limiting configuration
-run_test "Nginx Rate Limiting from Browser" "http://localhost:8080/api/unprotected?nginx-rate-limit" $UA_BROWSER
+run_test "Nginx Rate Limiting from Browser" "http://localhost:8080/api/unprotected" $UA_BROWSER
 
 # Configure Nginx for bot protection and restart
 sudo cp ./config/nginx-bot-protect.conf /etc/nginx/nginx.conf
 check_service nginx restart
 
 # Run tests against the Nginx bot protection configuration
-run_test "Nginx Bot Protection from Browser" "http://localhost:8080/api/unprotected?nginx-bot-protect" $UA_BROWSER
-run_test "Nginx Bot Protection from Curl" "http://localhost:8080/api/unprotected?nginx-bot-protect" $UA_CURL
+run_test "Nginx Bot Protection from Browser" "http://localhost:8080/api/unprotected" $UA_BROWSER
+run_test "Nginx Bot Protection from Curl" "http://localhost:8080/api/unprotected" $UA_CURL
