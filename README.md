@@ -72,4 +72,4 @@ cd arcjet-performance-test/
 
 Copy the output and paste it into ChatGTP with the following prompt:
 
-> The following is the output of a number of `ab` tests to determine response times of different security configurations. Analyse the data, and return a CSV matrix with "Requests per second" and "Response time (ms)" across the top, and a row for each test down the side. Return this as plain text.
+> The following is the output of a number of `ab` tests to determine response times of different security configurations. Analyze the data, and return a CSV matrix with "Requests per second" and "Response time (ms)" across the top, and a row for each test down the side. Return this as plain text.
