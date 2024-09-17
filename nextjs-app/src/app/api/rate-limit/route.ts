@@ -7,7 +7,7 @@ const aj = arcjet({
     fixedWindow({
       mode: "LIVE", // will block requests. Use "DRY_RUN" to log only
       window: 1, // 1 second fixed window
-      max: 50, // allow a maximum of 50 requests
+      max: 20, // allow a maximum of 20 requests
     }),
   ],
 });
