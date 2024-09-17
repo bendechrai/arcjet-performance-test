@@ -11,7 +11,7 @@ run_test() {
     echo "---"
     echo "Test: $test_name"
     echo ""
-    ab -n 100 -c 1 -H "User-Agent: $useragent" $url
+    ab -n 1000 -c 1 -H "User-Agent: $useragent" $url
     echo "---"
     echo ""
 }
@@ -51,6 +51,19 @@ sleep 61
 # Run Arcjet Bot Protection against the default Nginx configuration with curl user agent
 run_test "Arcjet Bot Protection from Curl" "http://localhost:8080/api/bot-detect" $UA_CURL
 
+# Bot Protection has a 60s block cache, so we need to wait for it to expire
+sleep 61
+
+# Run Arcjet Rate Limiting and Bot Protection against the default Nginx configuration with browser user agent
+run_test "Arcjet Rate Limiting and Bot Protection from Browser" "http://localhost:8080/api/rate-and-bot" $UA_BROWSER
+
+
+# Bot Protection has a 60s block cache, so we need to wait for it to expire
+sleep 61
+
+# Run Arcjet Rate Limiting and Bot Protection against the default Nginx configuration with curl user agent
+run_test "Arcjet Rate Limiting and Bot Protection from Curl" "http://localhost:8080/api/rate-and-bot" $UA_CURL
+
 # Configure Nginx for rate limiting and restart
 sudo cp ./config/nginx-rate-limit.conf /etc/nginx/nginx.conf
 check_service nginx restart
@@ -65,3 +78,11 @@ check_service nginx restart
 # Run tests against the Nginx bot protection configuration
 run_test "Nginx Bot Protection from Browser" "http://localhost:8080/api/unprotected" $UA_BROWSER
 run_test "Nginx Bot Protection from Curl" "http://localhost:8080/api/unprotected" $UA_CURL
+
+# Configure Nginx for bot protection and restart
+sudo cp ./config/nginx-rate-and-bot.conf /etc/nginx/nginx.conf
+check_service nginx restart
+
+# Run tests against the Nginx bot protection configuration
+run_test "Nginx Rate Limiting and Bot Protection from Browser" "http://localhost:8080/api/unprotected" $UA_BROWSER
+run_test "Nginx Rate Limiting and Bot Protection from Curl" "http://localhost:8080/api/unprotected" $UA_CURL
