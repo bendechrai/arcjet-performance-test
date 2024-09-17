@@ -11,8 +11,7 @@ run_test() {
     echo "---"
     echo "Test: $test_name"
     echo ""
-    # wrk -t2 -c2 -d5s -H "User-Agent: $useragent" $url
-    ab -n 500 -c 2 -H "User-Agent: $useragent" $url
+    ab -n 100 -c 1 -H "User-Agent: $useragent" $url
     echo "---"
     echo ""
 }
