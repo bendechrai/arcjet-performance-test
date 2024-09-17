@@ -1,5 +1,5 @@
-import { NextResponse } from 'next/server';
-import arcjet, { fixedWindow } from '@arcjet/next';
+import { NextResponse } from "next/server";
+import arcjet, { fixedWindow } from "@arcjet/next";
 
 const aj = arcjet({
   key: process.env.ARCJET_KEY!,
@@ -8,16 +8,46 @@ const aj = arcjet({
       mode: "LIVE", // will block requests. Use "DRY_RUN" to log only
       window: 1, // 1 second fixed window
       max: 50, // allow a maximum of 50 requests
-    })
-  ]
+    }),
+  ],
 });
 
-export async function GET(req: Request) {
-  const decision = await aj.protect(req);
+// Function to calculate Fibonacci sequence iteratively (create some load to this page render)
+function calculateFibonacci(n: number): number {
+  let a = 0,
+    b = 1,
+    temp;
+  while (n > 0) {
+    temp = a;
+    a = b;
+    b = temp + b;
+    n--;
+  }
+  return a;
+}
 
+export async function GET(req: Request) {
+  const headers = {
+    "Cache-Control":
+      "no-store, no-cache, must-revalidate, proxy-revalidate, max-age=0",
+    Pragma: "no-cache",
+    Expires: "0",
+  };
+
+  const decision = await aj.protect(req);
   if (decision.isDenied()) {
-    return NextResponse.json({ error: "Too Many Requests" }, { status: 429 });
+    return NextResponse.json(
+      { error: "Rate limited" },
+      { ...headers, status: 429 }
+    );
   }
 
-  return NextResponse.json({ message: 'Rate-limited endpoint' });
+  // Perform CPU-intensive tasks
+  const fibResult = calculateFibonacci(35);
+
+  return NextResponse.json(
+    { message: "Rate-limited endpoint", fibResult },
+    { headers }
+  );
 }
+
