@@ -27,6 +27,11 @@ check_service() {
     fi
 }
 
+# Pre-warm Next.js routes
+curl -s -o /dev/null -H "User-Agent: $UA_BROWSER" http://localhost:8080/api/unprotected
+curl -s -o /dev/null -H "User-Agent: $UA_BROWSER" http://localhost:8080/api/rate-limit
+curl -s -o /dev/null -H "User-Agent: $UA_BROWSER" http://localhost:8080/api/bot-detect
+
 # Configure Nginx for baseline configuration and restart
 sudo cp ./config/nginx.conf /etc/nginx/nginx.conf
 check_service nginx restart
@@ -37,10 +42,13 @@ run_test "Nginx Baseline from Browser" "http://localhost:8080/api/unprotected" $
 # Run Arcjet Rate Limiting against the default Nginx configuration
 run_test "Arcjet Rate Limiting from Browser" "http://localhost:8080/api/rate-limit" $UA_BROWSER
 
-# Run Arcjet Bot Protection against the default Nginx configuration
-sleep 2 # Wait a few seconds for any block cache to expire
+# Run Arcjet Bot Protection against the default Nginx configuration with browser user agent
 run_test "Arcjet Bot Protection from Browser" "http://localhost:8080/api/bot-detect" $UA_BROWSER
-sleep 2 # Wait a few seconds for any block cache to expire
+
+# Bot Protection has a 60s block cache, so we need to wait for it to expire
+sleep 61
+
+# Run Arcjet Bot Protection against the default Nginx configuration with curl user agent
 run_test "Arcjet Bot Protection from Curl" "http://localhost:8080/api/bot-detect" $UA_CURL
 
 # Configure Nginx for rate limiting and restart
