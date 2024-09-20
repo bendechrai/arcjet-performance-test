@@ -28,20 +28,66 @@ We tested this by launching a `t4g.small` instance in AWS `us-east-1` running `D
 
 ### Prerequisites
 
-- nginx
-- caddy (with rate limiting)
 - curl
 - nodejs
 - npm
 - apache2-utils
-- go (for building Caddy)
 
-#### Debian install
+### Creating an Arcjet Account in the testing environment
+
+Head to https://app.arcjettest.com/ and create an account, add a new site, and get your SDK key.
+
+#### Debian Script
 
 ```bash
 # Update and install basic dependencies
 sudo apt update
-sudo apt install -y nginx curl nodejs npm apache2-utils wget
+sudo apt install -y curl nodejs npm apache2-utils
+
+# Clone the repository
+git clone https://github.com/bendechrai/arcjet-performance-test
+cd arcjet-performance-test/nextjs-app
+npm install
+
+# Create a .env.local file and prompt for an ARCJET_KEY to inject
+cp .env.local.example .env.local
+echo -n "Paste your ARCJET_KEY here: "
+sed -i.bak "s/ajkey_.*/$(head -n 1)/g" .env.local && rm .env.local.bak
+
+# Run the Next.js application
+npm run build
+npm start
+```
+
+### Performance Testing
+
+In another terminal, run:
+
+```sh
+cd arcjet-performance-test/
+./test.sh | tee results.txt
+```
+
+### Analyzing Results
+
+Save the output of these tests to a file (e.g., `results.txt`) and analyze the results using the provided analysis script.
+
+```sh
+./parse_results.sh < results.txt
+```
+
+## Nginx and Caddy
+
+If you want to test with nginx or caddy, you will need to install the following:
+
+- nginx
+- caddy (with rate limiting)
+- go (for building Caddy)
+
+#### Debian install
+
+```sh
+sudo apt install -y nginx wget
 
 # Install a more recent version of Go (1.21)
 wget https://go.dev/dl/go1.21.3.linux-arm64.tar.gz
@@ -107,44 +153,4 @@ echo ":80" | sudo tee /etc/caddy/Caddyfile
 sudo systemctl daemon-reload
 sudo systemctl enable caddy
 sudo systemctl start caddy
-```
-
-### Creating an Arcjet Account in the testing environment
-
-Head to https://app.arcjettest.com/ and create an account, add a new site, and get your SDK key.
-
-### Clone and install
-
-```sh
-git clone https://github.com/bendechrai/arcjet-performance-test
-cd arcjet-performance-test/nextjs-app
-npm install
-```
-
-### Environment Setup
-
-Copy the `.env.local.example` file to `.env.local` and update the necessary environment variables.
-
-### Start the Application
-
-```sh
-npm run build
-npm start
-```
-
-### Performance Testing
-
-In another terminal, run:
-
-```sh
-cd arcjet-performance-test/
-./test.sh
-```
-
-### Analyzing Results
-
-Save the output of these tests to a file (e.g., `results.txt`) and analyze the results using the provided analysis script.
-
-```sh
-./parse_results.sh results.txt
 ```
