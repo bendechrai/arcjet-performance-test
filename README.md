@@ -21,7 +21,7 @@ The repository includes multiple configurations:
 In order to run this against the test environment, you will need to make sure you host close to our test services. These are located in the following locations:
 
 * AWS `us-east-1`
-* AWS `us-west-1`
+* AWS `eu-west-1`
 * Fly.io `iad`
 
 We tested this by launching a `t4g.small` instance in AWS `us-east-1` running `Debian 12 (HVM) 64-bit (Arm)`.
