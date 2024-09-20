@@ -28,24 +28,36 @@ check_service() {
     fi
 }
 
+# Function to warm up the server
+warm_up_server() {
+    local port=$1
+    echo -n "Warming up server on port $port"
+    for i in {1..5}; do
+        curl -s -o /dev/null -H "User-Agent: $UA_BROWSER" http://localhost:$port/api/unprotected
+        curl -s -o /dev/null -H "User-Agent: $UA_BROWSER" http://localhost:$port/api/rate-limit
+        curl -s -o /dev/null -H "User-Agent: $UA_BROWSER" http://localhost:$port/api/bot-detect
+        curl -s -o /dev/null -H "User-Agent: $UA_BROWSER" http://localhost:$port/api/rate-and-bot
+        echo -n "."
+        sleep 1
+    done
+    echo " warm-up complete."
+}
+
 # Pre-warm Next.js routes
-curl -s -o /dev/null -H "User-Agent: $UA_BROWSER" http://localhost:3000/api/unprotected
-curl -s -o /dev/null -H "User-Agent: $UA_BROWSER" http://localhost:3000/api/rate-limit
-curl -s -o /dev/null -H "User-Agent: $UA_BROWSER" http://localhost:3000/api/bot-detect
-curl -s -o /dev/null -H "User-Agent: $UA_BROWSER" http://localhost:3000/api/rate-and-bot
+warm_up_server 3000
 
 #####################################
 # RUN TEST AGAINST NEXT.JS DIRECTLY #
 #####################################
-run_test "Next server : Baseline" "http://localhost:3000/api/unprotected" $UA_BROWSER
-run_test "Next server : Aj Rate" "http://localhost:3000/api/rate-limit" $UA_BROWSER
-run_test "Next server : Aj Bot (Browser)" "http://localhost:3000/api/bot-detect" $UA_BROWSER
+run_test "Next server : Baseline" "http://localhost:3000/api/unprotected" "$UA_BROWSER"
+run_test "Next server : Aj Rate" "http://localhost:3000/api/rate-limit" "$UA_BROWSER"
+run_test "Next server : Aj Bot (Browser)" "http://localhost:3000/api/bot-detect" "$UA_BROWSER"
 sleep 61 # Aj Bot Protection has a 60s block cache, so we need to wait for it to expire
-run_test "Next server : Aj Bot (Curl)" "http://localhost:3000/api/bot-detect" $UA_CURL
+run_test "Next server : Aj Bot (Curl)" "http://localhost:3000/api/bot-detect" "$UA_CURL"
 sleep 61
-run_test "Next server : Aj Rate+Bot (Browser)" "http://localhost:3000/api/rate-and-bot" $UA_BROWSER
+run_test "Next server : Aj Rate+Bot (Browser)" "http://localhost:3000/api/rate-and-bot" "$UA_BROWSER"
 sleep 61
-run_test "Next server : Aj Rate+Bot (Curl)" "http://localhost:3000/api/rate-and-bot" $UA_CURL
+run_test "Next server : Aj Rate+Bot (Curl)" "http://localhost:3000/api/rate-and-bot" "$UA_CURL"
 sleep 61
 
 ################################
@@ -53,15 +65,16 @@ sleep 61
 ################################
 sudo cp ./config/nginx.conf /etc/nginx/nginx.conf
 check_service nginx restart
-run_test "nginx proxy : Baseline" "http://localhost:8080/api/unprotected" $UA_BROWSER
-run_test "nginx proxy : Aj Rate" "http://localhost:8080/api/rate-limit" $UA_BROWSER
-run_test "nginx proxy : Aj Bot (Browser)" "http://localhost:8080/api/bot-detect" $UA_BROWSER
+warm_up_server 8080
+run_test "nginx proxy : Baseline" "http://localhost:8080/api/unprotected" "$UA_BROWSER"
+run_test "nginx proxy : Aj Rate" "http://localhost:8080/api/rate-limit" "$UA_BROWSER"
+run_test "nginx proxy : Aj Bot (Browser)" "http://localhost:8080/api/bot-detect" "$UA_BROWSER"
 sleep 61
-run_test "nginx proxy : Aj Bot (Curl)" "http://localhost:8080/api/bot-detect" $UA_CURL
+run_test "nginx proxy : Aj Bot (Curl)" "http://localhost:8080/api/bot-detect" "$UA_CURL"
 sleep 61
-run_test "nginx proxy : Aj Rate+Bot (Browser)" "http://localhost:8080/api/rate-and-bot" $UA_BROWSER
+run_test "nginx proxy : Aj Rate+Bot (Browser)" "http://localhost:8080/api/rate-and-bot" "$UA_BROWSER"
 sleep 61
-run_test "nginx proxy : Aj Rate+Bot (Curl)" "http://localhost:8080/api/rate-and-bot" $UA_CURL
+run_test "nginx proxy : Aj Rate+Bot (Curl)" "http://localhost:8080/api/rate-and-bot" "$UA_CURL"
 sleep 61
 
 ###################################################
@@ -69,38 +82,42 @@ sleep 61
 ###################################################
 sudo cp ./config/nginx-rate-limit.conf /etc/nginx/nginx.conf
 check_service nginx restart
-run_test "nginx rate" "http://localhost:8080/api/unprotected" $UA_BROWSER
+warm_up_server 8080
+run_test "nginx rate" "http://localhost:8080/api/unprotected" "$UA_BROWSER"
 
 ####################################################
 # RUN TEST AGAINST NGINX PROXY WITH BOT PROTECTION #
 ####################################################
 sudo cp ./config/nginx-bot-protect.conf /etc/nginx/nginx.conf
 check_service nginx restart
-run_test "nginx bot : Browser" "http://localhost:8080/api/unprotected" $UA_BROWSER
-run_test "nginx bot : Curl" "http://localhost:8080/api/unprotected" $UA_CURL
+warm_up_server 8080
+run_test "nginx bot : Browser" "http://localhost:8080/api/unprotected" "$UA_BROWSER"
+run_test "nginx bot : Curl" "http://localhost:8080/api/unprotected" "$UA_CURL"
 
 ###########################################################################
 # RUN TEST AGAINST NGINX PROXY WITH BOTH RATE LIMITING AND BOT PROTECTION #
 ###########################################################################
 sudo cp ./config/nginx-rate-and-bot.conf /etc/nginx/nginx.conf
 check_service nginx restart
-run_test "nginx rate+bot : Browser" "http://localhost:8080/api/unprotected" $UA_BROWSER
-run_test "nginx rate+bot : Curl" "http://localhost:8080/api/unprotected" $UA_CURL
+warm_up_server 8080
+run_test "nginx rate+bot : Browser" "http://localhost:8080/api/unprotected" "$UA_BROWSER"
+run_test "nginx rate+bot : Curl" "http://localhost:8080/api/unprotected" "$UA_CURL"
 
 ################################
 # RUN TEST AGAINST CADDY PROXY #
 ################################
 sudo cp ./config/caddy.conf /etc/caddy/Caddyfile
 check_service caddy restart
-run_test "caddy proxy : Baseline" "http://localhost:8081/api/unprotected" $UA_BROWSER
-run_test "caddy proxy : Aj Rate" "http://localhost:8081/api/rate-limit" $UA_BROWSER
-run_test "caddy proxy : Aj Bot (Browser)" "http://localhost:8081/api/bot-detect" $UA_BROWSER
+warm_up_server 8081
+run_test "caddy proxy : Baseline" "http://localhost:8081/api/unprotected" "$UA_BROWSER"
+run_test "caddy proxy : Aj Rate" "http://localhost:8081/api/rate-limit" "$UA_BROWSER"
+run_test "caddy proxy : Aj Bot (Browser)" "http://localhost:8081/api/bot-detect" "$UA_BROWSER"
 sleep 61
-run_test "caddy proxy : Aj Bot (Curl)" "http://localhost:8081/api/bot-detect" $UA_CURL
+run_test "caddy proxy : Aj Bot (Curl)" "http://localhost:8081/api/bot-detect" "$UA_CURL"
 sleep 61
-run_test "caddy proxy : Aj Rate+Bot (Browser)" "http://localhost:8081/api/rate-and-bot" $UA_BROWSER
+run_test "caddy proxy : Aj Rate+Bot (Browser)" "http://localhost:8081/api/rate-and-bot" "$UA_BROWSER"
 sleep 61
-run_test "caddy proxy : Aj Rate+Bot (Curl)" "http://localhost:8081/api/rate-and-bot" $UA_CURL
+run_test "caddy proxy : Aj Rate+Bot (Curl)" "http://localhost:8081/api/rate-and-bot" "$UA_CURL"
 sleep 61
 
 ###################################################
@@ -108,20 +125,23 @@ sleep 61
 ###################################################
 sudo cp ./config/caddy-rate-limit.conf /etc/caddy/Caddyfile
 check_service caddy restart
-run_test "caddy rate" "http://localhost:8081/api/unprotected" $UA_BROWSER
+warm_up_server 8081
+run_test "caddy rate" "http://localhost:8081/api/unprotected" "$UA_BROWSER"
 
 ####################################################
 # RUN TEST AGAINST CADDY PROXY WITH BOT PROTECTION #
 ####################################################
 sudo cp ./config/caddy-bot-protect.conf /etc/caddy/Caddyfile
 check_service caddy restart
-run_test "caddy bot : Browser" "http://localhost:8081/api/unprotected" $UA_BROWSER
-run_test "caddy bot : Curl" "http://localhost:8081/api/unprotected" $UA_CURL
+warm_up_server 8081
+run_test "caddy bot : Browser" "http://localhost:8081/api/unprotected" "$UA_BROWSER"
+run_test "caddy bot : Curl" "http://localhost:8081/api/unprotected" "$UA_CURL"
 
 ###########################################################################
 # RUN TEST AGAINST CADDY PROXY WITH BOTH RATE LIMITING AND BOT PROTECTION #
 ###########################################################################
 sudo cp ./config/caddy-rate-and-bot.conf /etc/caddy/Caddyfile
 check_service caddy restart
-run_test "caddy rate+bot : Browser" "http://localhost:8081/api/unprotected" $UA_BROWSER
-run_test "caddy rate+bot : Curl" "http://localhost:8081/api/unprotected" $UA_CURL
+warm_up_server 8081
+run_test "caddy rate+bot : Browser" "http://localhost:8081/api/unprotected" "$UA_BROWSER"
+run_test "caddy rate+bot : Curl" "http://localhost:8081/api/unprotected" "$UA_CURL"
