@@ -20,21 +20,21 @@ The repository includes multiple configurations:
 
 In order to run this against the test environment, you will need to make sure you host close to our test services. These are located in the following locations:
 
-* AWS `us-east-1`
-* AWS `eu-west-1`
-* Fly.io `iad`
+- AWS `us-east-1`
+- AWS `eu-west-1`
+- Fly.io `iad`
 
 We tested this by launching a `t4g.small` instance in AWS `us-east-1` running `Debian 12 (HVM) 64-bit (Arm)`.
 
 ### Prerequisites
 
-* nginx
-* caddy (with rate limiting)
-* curl
-* nodejs
-* npm
-* apache2-utils
-* go (for building Caddy)
+- nginx
+- caddy (with rate limiting)
+- curl
+- nodejs
+- npm
+- apache2-utils
+- go (for building Caddy)
 
 #### Debian install
 
@@ -128,7 +128,7 @@ Copy the `.env.local.example` file to `.env.local` and update the necessary envi
 ### Start the Application
 
 ```sh
-npm run build 
+npm run build
 npm start
 ```
 
@@ -138,63 +138,13 @@ In another terminal, run:
 
 ```sh
 cd arcjet-performance-test/
-./test.sh 
+./test.sh
 ```
 
 ### Analyzing Results
 
-Paste the following prompt into ChatGTP:
+Save the output of these tests to a file (e.g., `results.txt`) and analyze the results using the provided analysis script.
 
-> The following is the output of a number of `ab` tests to determine response times
-> of different security configurations. Analyze the data, and return a CSV matrix
-> with columns "Test" and "Response time (ms)" across the top. Provide the response time
-> as a float value with 2 decimal places, and no unit. Whenever you see a (Browser) test
-> followed by a (Curl) test, create an additional row in the matrix with the average of
-> the two values.
->
-> The data is as follows:
->
-> | Test | Response time (ms) |
-> | --- | --- |
-> | Next server : Baseline | 123.45 |
-> | Next server : Aj Rate | 123.45 |
-> | Next server : Aj Bot (Browser) | 123.45 |
-> | Next server : Aj Bot (Curl) | 123.45 |
-> | Next server : Aj Bot (Average) | 123.45 |
-> | Next server : Aj Rate+Bot (Browser) | 123.45 |
-> | Next server : Aj Rate+Bot (Curl) | 123.45 |
-> | Next server : Aj Rate+Bot (Average) | 123.45 |
-> | nginx proxy : Baseline | 123.45 |
-> | nginx proxy : Aj Rate | 123.45 |
-> | nginx proxy : Aj Bot (Browser) | 123.45 |
-> | nginx proxy : Aj Bot (Curl) | 123.45 |
-> | nginx proxy : Aj Bot (Average) | 123.45 |
-> | nginx proxy : Aj Rate+Bot (Browser) | 123.45 |
-> | nginx proxy : Aj Rate+Bot (Curl) | 123.45 |
-> | nginx proxy : Aj Rate+Bot (Average) | 123.45 |
-> | nginx rate | 123.45 |
-> | nginx bot : Browser | 123.45 |
-> | nginx bot : Curl | 123.45 |
-> | nginx bot : Average | 123.45 |
-> | nginx rate+bot : Browser | 123.45 |
-> | nginx rate+bot : Curl | 123.45 |
-> | nginx rate+bot : Average | 123.45 |
-> | caddy proxy : Baseline | 123.45 |
-> | caddy proxy : Aj Rate | 123.45 |
-> | caddy proxy : Aj Bot (Browser) | 123.45 |
-> | caddy proxy : Aj Bot (Curl) | 123.45 |
-> | caddy proxy : Aj Bot (Average) | 123.45 |
-> | caddy proxy : Aj Rate+Bot (Browser) | 123.45 |
-> | caddy proxy : Aj Rate+Bot (Curl) | 123.45 |
-> | caddy proxy : Aj Rate+Bot (Average) | 123.45 |
-> | caddy rate | 123.45 |
-> | caddy bot : Browser | 123.45 |
-> | caddy bot : Curl | 123.45 |
-> | caddy bot : Average | 123.45 |
-> | caddy rate+bot : Browser | 123.45 |
-> | caddy rate+bot : Curl | 123.45 |
-> | caddy rate+bot : Average | 123.45 |
->
-> Provide your response in CSV format as plain text. Do nothing right now. Await the data which will be provided in the next step.
-
-Then copy and paste the entire output of the `./test.sh` script into ChatGTP.
+```sh
+./parse_results.sh results.txt
+```

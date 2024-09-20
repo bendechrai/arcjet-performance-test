@@ -1,0 +1,1661 @@
+---
+Test: Next server : Baseline
+
+This is ApacheBench, Version 2.3 <$Revision: 1913912 $>
+Copyright 1996 Adam Twiss, Zeus Technology Ltd, http://www.zeustech.net/
+Licensed to The Apache Software Foundation, http://www.apache.org/
+
+Benchmarking localhost (be patient)
+Completed 100 requests
+Completed 200 requests
+Completed 300 requests
+Completed 400 requests
+Completed 500 requests
+Completed 600 requests
+Completed 700 requests
+Completed 800 requests
+Completed 900 requests
+Completed 1000 requests
+Finished 1000 requests
+
+
+Server Software:        
+Server Hostname:        localhost
+Server Port:            3000
+
+Document Path:          /api/unprotected
+Document Length:        55 bytes
+
+Concurrency Level:      1
+Time taken for tests:   3.196 seconds
+Complete requests:      1000
+Failed requests:        0
+Total transferred:      351000 bytes
+HTML transferred:       55000 bytes
+Requests per second:    312.92 [#/sec] (mean)
+Time per request:       3.196 [ms] (mean)
+Time per request:       3.196 [ms] (mean, across all concurrent requests)
+Transfer rate:          107.26 [Kbytes/sec] received
+
+Connection Times (ms)
+              min  mean[+/-sd] median   max
+Connect:        0    0   0.0      0       0
+Processing:     2    3   1.3      3      22
+Waiting:        2    3   1.2      2      19
+Total:          2    3   1.3      3      22
+
+Percentage of the requests served within a certain time (ms)
+  50%      3
+  66%      3
+  75%      3
+  80%      3
+  90%      4
+  95%      6
+  98%      7
+  99%      8
+ 100%     22 (longest request)
+---
+
+---
+Test: Next server : Aj Rate
+
+This is ApacheBench, Version 2.3 <$Revision: 1913912 $>
+Copyright 1996 Adam Twiss, Zeus Technology Ltd, http://www.zeustech.net/
+Licensed to The Apache Software Foundation, http://www.apache.org/
+
+Benchmarking localhost (be patient)
+Completed 100 requests
+Completed 200 requests
+Completed 300 requests
+Completed 400 requests
+Completed 500 requests
+Completed 600 requests
+Completed 700 requests
+Completed 800 requests
+Completed 900 requests
+Completed 1000 requests
+Finished 1000 requests
+
+
+Server Software:        
+Server Hostname:        localhost
+Server Port:            3000
+
+Document Path:          /api/rate-limit
+Document Length:        55 bytes
+
+Concurrency Level:      1
+Time taken for tests:   19.662 seconds
+Complete requests:      1000
+Failed requests:        600
+   (Connect: 0, Receive: 0, Length: 600, Exceptions: 0)
+Non-2xx responses:      600
+Total transferred:      253800 bytes
+HTML transferred:       36400 bytes
+Requests per second:    50.86 [#/sec] (mean)
+Time per request:       19.662 [ms] (mean)
+Time per request:       19.662 [ms] (mean, across all concurrent requests)
+Transfer rate:          12.61 [Kbytes/sec] received
+
+Connection Times (ms)
+              min  mean[+/-sd] median   max
+Connect:        0    0   0.0      0       0
+Processing:    12   20   8.5     16     107
+Waiting:       12   19   8.1     16     106
+Total:         12   20   8.5     16     107
+
+Percentage of the requests served within a certain time (ms)
+  50%     16
+  66%     18
+  75%     21
+  80%     23
+  90%     32
+  95%     38
+  98%     42
+  99%     46
+ 100%    107 (longest request)
+---
+
+---
+Test: Next server : Aj Bot (Browser)
+
+This is ApacheBench, Version 2.3 <$Revision: 1913912 $>
+Copyright 1996 Adam Twiss, Zeus Technology Ltd, http://www.zeustech.net/
+Licensed to The Apache Software Foundation, http://www.apache.org/
+
+Benchmarking localhost (be patient)
+Completed 100 requests
+Completed 200 requests
+Completed 300 requests
+Completed 400 requests
+Completed 500 requests
+Completed 600 requests
+Completed 700 requests
+Completed 800 requests
+Completed 900 requests
+Completed 1000 requests
+Finished 1000 requests
+
+
+Server Software:        
+Server Hostname:        localhost
+Server Port:            3000
+
+Document Path:          /api/bot-detect
+Document Length:        56 bytes
+
+Concurrency Level:      1
+Time taken for tests:   25.899 seconds
+Complete requests:      1000
+Failed requests:        0
+Total transferred:      331000 bytes
+HTML transferred:       56000 bytes
+Requests per second:    38.61 [#/sec] (mean)
+Time per request:       25.899 [ms] (mean)
+Time per request:       25.899 [ms] (mean, across all concurrent requests)
+Transfer rate:          12.48 [Kbytes/sec] received
+
+Connection Times (ms)
+              min  mean[+/-sd] median   max
+Connect:        0    0   0.0      0       0
+Processing:    16   26  10.2     21     131
+Waiting:       16   25   9.9     20     131
+Total:         16   26  10.2     21     131
+
+Percentage of the requests served within a certain time (ms)
+  50%     21
+  66%     27
+  75%     32
+  80%     35
+  90%     41
+  95%     44
+  98%     49
+  99%     54
+ 100%    131 (longest request)
+---
+
+---
+Test: Next server : Aj Bot (Curl)
+
+This is ApacheBench, Version 2.3 <$Revision: 1913912 $>
+Copyright 1996 Adam Twiss, Zeus Technology Ltd, http://www.zeustech.net/
+Licensed to The Apache Software Foundation, http://www.apache.org/
+
+Benchmarking localhost (be patient)
+Completed 100 requests
+Completed 200 requests
+Completed 300 requests
+Completed 400 requests
+Completed 500 requests
+Completed 600 requests
+Completed 700 requests
+Completed 800 requests
+Completed 900 requests
+Completed 1000 requests
+Finished 1000 requests
+
+
+Server Software:        
+Server Hostname:        localhost
+Server Port:            3000
+
+Document Path:          /api/bot-detect
+Document Length:        24 bytes
+
+Concurrency Level:      1
+Time taken for tests:   14.222 seconds
+Complete requests:      1000
+Failed requests:        0
+Non-2xx responses:      1000
+Total transferred:      195000 bytes
+HTML transferred:       24000 bytes
+Requests per second:    70.31 [#/sec] (mean)
+Time per request:       14.222 [ms] (mean)
+Time per request:       14.222 [ms] (mean, across all concurrent requests)
+Transfer rate:          13.39 [Kbytes/sec] received
+
+Connection Times (ms)
+              min  mean[+/-sd] median   max
+Connect:        0    0   0.0      0       0
+Processing:     5   14   8.8     10      49
+Waiting:        5   13   8.6     10      48
+Total:          5   14   8.8     11      49
+
+Percentage of the requests served within a certain time (ms)
+  50%     11
+  66%     16
+  75%     18
+  80%     21
+  90%     29
+  95%     33
+  98%     36
+  99%     37
+ 100%     49 (longest request)
+---
+
+---
+Test: Next server : Aj Rate+Bot (Browser)
+
+This is ApacheBench, Version 2.3 <$Revision: 1913912 $>
+Copyright 1996 Adam Twiss, Zeus Technology Ltd, http://www.zeustech.net/
+Licensed to The Apache Software Foundation, http://www.apache.org/
+
+Benchmarking localhost (be patient)
+Completed 100 requests
+Completed 200 requests
+Completed 300 requests
+Completed 400 requests
+Completed 500 requests
+Completed 600 requests
+Completed 700 requests
+Completed 800 requests
+Completed 900 requests
+Completed 1000 requests
+Finished 1000 requests
+
+
+Server Software:        
+Server Hostname:        localhost
+Server Port:            3000
+
+Document Path:          /api/rate-and-bot
+Document Length:        56 bytes
+
+Concurrency Level:      1
+Time taken for tests:   46.614 seconds
+Complete requests:      1000
+Failed requests:        396
+   (Connect: 0, Receive: 0, Length: 396, Exceptions: 0)
+Non-2xx responses:      396
+Total transferred:      283480 bytes
+HTML transferred:       49664 bytes
+Requests per second:    21.45 [#/sec] (mean)
+Time per request:       46.614 [ms] (mean)
+Time per request:       46.614 [ms] (mean, across all concurrent requests)
+Transfer rate:          5.94 [Kbytes/sec] received
+
+Connection Times (ms)
+              min  mean[+/-sd] median   max
+Connect:        0    0   0.0      0       0
+Processing:    17   47 131.7     25    1042
+Waiting:       17   46 131.7     24    1042
+Total:         17   47 131.7     25    1042
+
+Percentage of the requests served within a certain time (ms)
+  50%     25
+  66%     30
+  75%     37
+  80%     40
+  90%     43
+  95%     47
+  98%    169
+  99%   1012
+ 100%   1042 (longest request)
+---
+
+---
+Test: Next server : Aj Rate+Bot (Curl)
+
+This is ApacheBench, Version 2.3 <$Revision: 1913912 $>
+Copyright 1996 Adam Twiss, Zeus Technology Ltd, http://www.zeustech.net/
+Licensed to The Apache Software Foundation, http://www.apache.org/
+
+Benchmarking localhost (be patient)
+Completed 100 requests
+Completed 200 requests
+Completed 300 requests
+Completed 400 requests
+Completed 500 requests
+Completed 600 requests
+Completed 700 requests
+Completed 800 requests
+Completed 900 requests
+Completed 1000 requests
+Finished 1000 requests
+
+
+Server Software:        
+Server Hostname:        localhost
+Server Port:            3000
+
+Document Path:          /api/rate-and-bot
+Document Length:        40 bytes
+
+Concurrency Level:      1
+Time taken for tests:   13.527 seconds
+Complete requests:      1000
+Failed requests:        0
+Non-2xx responses:      1000
+Total transferred:      211000 bytes
+HTML transferred:       40000 bytes
+Requests per second:    73.93 [#/sec] (mean)
+Time per request:       13.527 [ms] (mean)
+Time per request:       13.527 [ms] (mean, across all concurrent requests)
+Transfer rate:          15.23 [Kbytes/sec] received
+
+Connection Times (ms)
+              min  mean[+/-sd] median   max
+Connect:        0    0   0.0      0       0
+Processing:     5   13   8.8     10      45
+Waiting:        5   13   8.4      9      45
+Total:          5   13   8.8     10      45
+
+Percentage of the requests served within a certain time (ms)
+  50%     10
+  66%     15
+  75%     17
+  80%     20
+  90%     29
+  95%     33
+  98%     34
+  99%     35
+ 100%     45 (longest request)
+---
+
+---
+Test: nginx proxy : Baseline
+
+This is ApacheBench, Version 2.3 <$Revision: 1913912 $>
+Copyright 1996 Adam Twiss, Zeus Technology Ltd, http://www.zeustech.net/
+Licensed to The Apache Software Foundation, http://www.apache.org/
+
+Benchmarking localhost (be patient)
+Completed 100 requests
+Completed 200 requests
+Completed 300 requests
+Completed 400 requests
+Completed 500 requests
+Completed 600 requests
+Completed 700 requests
+Completed 800 requests
+Completed 900 requests
+Completed 1000 requests
+Finished 1000 requests
+
+
+Server Software:        nginx/1.22.1
+Server Hostname:        localhost
+Server Port:            8080
+
+Document Path:          /api/unprotected
+Document Length:        55 bytes
+
+Concurrency Level:      1
+Time taken for tests:   2.809 seconds
+Complete requests:      1000
+Failed requests:        0
+Total transferred:      484000 bytes
+HTML transferred:       55000 bytes
+Requests per second:    355.94 [#/sec] (mean)
+Time per request:       2.809 [ms] (mean)
+Time per request:       2.809 [ms] (mean, across all concurrent requests)
+Transfer rate:          168.24 [Kbytes/sec] received
+
+Connection Times (ms)
+              min  mean[+/-sd] median   max
+Connect:        0    0   0.0      0       0
+Processing:     2    3   1.2      2      19
+Waiting:        2    3   1.2      2      19
+Total:          2    3   1.2      3      19
+
+Percentage of the requests served within a certain time (ms)
+  50%      3
+  66%      3
+  75%      3
+  80%      3
+  90%      4
+  95%      4
+  98%      6
+  99%      9
+ 100%     19 (longest request)
+---
+
+---
+Test: nginx proxy : Aj Rate
+
+This is ApacheBench, Version 2.3 <$Revision: 1913912 $>
+Copyright 1996 Adam Twiss, Zeus Technology Ltd, http://www.zeustech.net/
+Licensed to The Apache Software Foundation, http://www.apache.org/
+
+Benchmarking localhost (be patient)
+Completed 100 requests
+Completed 200 requests
+Completed 300 requests
+Completed 400 requests
+Completed 500 requests
+Completed 600 requests
+Completed 700 requests
+Completed 800 requests
+Completed 900 requests
+Completed 1000 requests
+Finished 1000 requests
+
+
+Server Software:        nginx/1.22.1
+Server Hostname:        localhost
+Server Port:            8080
+
+Document Path:          /api/rate-limit
+Document Length:        55 bytes
+
+Concurrency Level:      1
+Time taken for tests:   35.820 seconds
+Complete requests:      1000
+Failed requests:        558
+   (Connect: 0, Receive: 0, Length: 558, Exceptions: 0)
+Non-2xx responses:      558
+Total transferred:      330196 bytes
+HTML transferred:       37702 bytes
+Requests per second:    27.92 [#/sec] (mean)
+Time per request:       35.820 [ms] (mean)
+Time per request:       35.820 [ms] (mean, across all concurrent requests)
+Transfer rate:          9.00 [Kbytes/sec] received
+
+Connection Times (ms)
+              min  mean[+/-sd] median   max
+Connect:        0    0   0.0      0       1
+Processing:    12   36 120.6     18    1018
+Waiting:       12   36 120.6     18    1018
+Total:         12   36 120.6     18    1018
+
+Percentage of the requests served within a certain time (ms)
+  50%     18
+  66%     23
+  75%     26
+  80%     30
+  90%     33
+  95%     39
+  98%     54
+  99%   1007
+ 100%   1018 (longest request)
+---
+
+---
+Test: nginx proxy : Aj Bot (Browser)
+
+This is ApacheBench, Version 2.3 <$Revision: 1913912 $>
+Copyright 1996 Adam Twiss, Zeus Technology Ltd, http://www.zeustech.net/
+Licensed to The Apache Software Foundation, http://www.apache.org/
+
+Benchmarking localhost (be patient)
+Completed 100 requests
+Completed 200 requests
+Completed 300 requests
+Completed 400 requests
+Completed 500 requests
+Completed 600 requests
+Completed 700 requests
+Completed 800 requests
+Completed 900 requests
+Completed 1000 requests
+Finished 1000 requests
+
+
+Server Software:        nginx/1.22.1
+Server Hostname:        localhost
+Server Port:            8080
+
+Document Path:          /api/bot-detect
+Document Length:        56 bytes
+
+Concurrency Level:      1
+Time taken for tests:   27.139 seconds
+Complete requests:      1000
+Failed requests:        0
+Total transferred:      464000 bytes
+HTML transferred:       56000 bytes
+Requests per second:    36.85 [#/sec] (mean)
+Time per request:       27.139 [ms] (mean)
+Time per request:       27.139 [ms] (mean, across all concurrent requests)
+Transfer rate:          16.70 [Kbytes/sec] received
+
+Connection Times (ms)
+              min  mean[+/-sd] median   max
+Connect:        0    0   0.0      0       1
+Processing:    16   27   8.4     25      55
+Waiting:       16   27   8.4     25      55
+Total:         16   27   8.4     25      55
+
+Percentage of the requests served within a certain time (ms)
+  50%     25
+  66%     30
+  75%     33
+  80%     34
+  90%     41
+  95%     43
+  98%     45
+  99%     47
+ 100%     55 (longest request)
+---
+
+---
+Test: nginx proxy : Aj Bot (Curl)
+
+This is ApacheBench, Version 2.3 <$Revision: 1913912 $>
+Copyright 1996 Adam Twiss, Zeus Technology Ltd, http://www.zeustech.net/
+Licensed to The Apache Software Foundation, http://www.apache.org/
+
+Benchmarking localhost (be patient)
+Completed 100 requests
+Completed 200 requests
+Completed 300 requests
+Completed 400 requests
+Completed 500 requests
+Completed 600 requests
+Completed 700 requests
+Completed 800 requests
+Completed 900 requests
+Completed 1000 requests
+Finished 1000 requests
+
+
+Server Software:        nginx/1.22.1
+Server Hostname:        localhost
+Server Port:            8080
+
+Document Path:          /api/bot-detect
+Document Length:        24 bytes
+
+Concurrency Level:      1
+Time taken for tests:   13.187 seconds
+Complete requests:      1000
+Failed requests:        0
+Non-2xx responses:      1000
+Total transferred:      217000 bytes
+HTML transferred:       24000 bytes
+Requests per second:    75.83 [#/sec] (mean)
+Time per request:       13.187 [ms] (mean)
+Time per request:       13.187 [ms] (mean, across all concurrent requests)
+Transfer rate:          16.07 [Kbytes/sec] received
+
+Connection Times (ms)
+              min  mean[+/-sd] median   max
+Connect:        0    0   0.0      0       0
+Processing:     5   13   8.6     10      63
+Waiting:        5   13   8.6     10      63
+Total:          5   13   8.6     10      63
+
+Percentage of the requests served within a certain time (ms)
+  50%     10
+  66%     15
+  75%     17
+  80%     18
+  90%     27
+  95%     33
+  98%     34
+  99%     35
+ 100%     63 (longest request)
+---
+
+---
+Test: nginx proxy : Aj Rate+Bot (Browser)
+
+This is ApacheBench, Version 2.3 <$Revision: 1913912 $>
+Copyright 1996 Adam Twiss, Zeus Technology Ltd, http://www.zeustech.net/
+Licensed to The Apache Software Foundation, http://www.apache.org/
+
+Benchmarking localhost (be patient)
+Completed 100 requests
+Completed 200 requests
+Completed 300 requests
+Completed 400 requests
+Completed 500 requests
+Completed 600 requests
+Completed 700 requests
+Completed 800 requests
+Completed 900 requests
+Completed 1000 requests
+Finished 1000 requests
+
+
+Server Software:        nginx/1.22.1
+Server Hostname:        localhost
+Server Port:            8080
+
+Document Path:          /api/rate-and-bot
+Document Length:        56 bytes
+
+Concurrency Level:      1
+Time taken for tests:   30.169 seconds
+Complete requests:      1000
+Failed requests:        392
+   (Connect: 0, Receive: 0, Length: 392, Exceptions: 0)
+Non-2xx responses:      392
+Total transferred:      373448 bytes
+HTML transferred:       49728 bytes
+Requests per second:    33.15 [#/sec] (mean)
+Time per request:       30.169 [ms] (mean)
+Time per request:       30.169 [ms] (mean, across all concurrent requests)
+Transfer rate:          12.09 [Kbytes/sec] received
+
+Connection Times (ms)
+              min  mean[+/-sd] median   max
+Connect:        0    0   0.0      0       0
+Processing:    17   30  14.0     27     216
+Waiting:       16   30  14.0     27     216
+Total:         17   30  14.0     27     216
+
+Percentage of the requests served within a certain time (ms)
+  50%     27
+  66%     33
+  75%     36
+  80%     38
+  90%     42
+  95%     46
+  98%     56
+  99%     82
+ 100%    216 (longest request)
+---
+
+---
+Test: nginx proxy : Aj Rate+Bot (Curl)
+
+This is ApacheBench, Version 2.3 <$Revision: 1913912 $>
+Copyright 1996 Adam Twiss, Zeus Technology Ltd, http://www.zeustech.net/
+Licensed to The Apache Software Foundation, http://www.apache.org/
+
+Benchmarking localhost (be patient)
+Completed 100 requests
+Completed 200 requests
+Completed 300 requests
+Completed 400 requests
+Completed 500 requests
+Completed 600 requests
+Completed 700 requests
+Completed 800 requests
+Completed 900 requests
+Completed 1000 requests
+Finished 1000 requests
+
+
+Server Software:        nginx/1.22.1
+Server Hostname:        localhost
+Server Port:            8080
+
+Document Path:          /api/rate-and-bot
+Document Length:        40 bytes
+
+Concurrency Level:      1
+Time taken for tests:   13.275 seconds
+Complete requests:      1000
+Failed requests:        0
+Non-2xx responses:      1000
+Total transferred:      233000 bytes
+HTML transferred:       40000 bytes
+Requests per second:    75.33 [#/sec] (mean)
+Time per request:       13.275 [ms] (mean)
+Time per request:       13.275 [ms] (mean, across all concurrent requests)
+Transfer rate:          17.14 [Kbytes/sec] received
+
+Connection Times (ms)
+              min  mean[+/-sd] median   max
+Connect:        0    0   0.0      0       0
+Processing:     5   13   8.6     10      37
+Waiting:        5   13   8.6      9      37
+Total:          5   13   8.6     10      37
+
+Percentage of the requests served within a certain time (ms)
+  50%     10
+  66%     15
+  75%     17
+  80%     19
+  90%     28
+  95%     33
+  98%     34
+  99%     35
+ 100%     37 (longest request)
+---
+
+---
+Test: nginx rate
+
+This is ApacheBench, Version 2.3 <$Revision: 1913912 $>
+Copyright 1996 Adam Twiss, Zeus Technology Ltd, http://www.zeustech.net/
+Licensed to The Apache Software Foundation, http://www.apache.org/
+
+Benchmarking localhost (be patient)
+Completed 100 requests
+Completed 200 requests
+Completed 300 requests
+Completed 400 requests
+Completed 500 requests
+Completed 600 requests
+Completed 700 requests
+Completed 800 requests
+Completed 900 requests
+Completed 1000 requests
+Finished 1000 requests
+
+
+Server Software:        nginx/1.22.1
+Server Hostname:        localhost
+Server Port:            8080
+
+Document Path:          /api/unprotected
+Document Length:        55 bytes
+
+Concurrency Level:      1
+Time taken for tests:   0.205 seconds
+Complete requests:      1000
+Failed requests:        995
+   (Connect: 0, Receive: 0, Length: 995, Exceptions: 0)
+Non-2xx responses:      995
+Total transferred:      369575 bytes
+HTML transferred:       196290 bytes
+Requests per second:    4875.27 [#/sec] (mean)
+Time per request:       0.205 [ms] (mean)
+Time per request:       0.205 [ms] (mean, across all concurrent requests)
+Transfer rate:          1759.55 [Kbytes/sec] received
+
+Connection Times (ms)
+              min  mean[+/-sd] median   max
+Connect:        0    0   0.0      0       0
+Processing:     0    0   0.4      0       7
+Waiting:        0    0   0.4      0       7
+Total:          0    0   0.4      0       7
+
+Percentage of the requests served within a certain time (ms)
+  50%      0
+  66%      0
+  75%      0
+  80%      0
+  90%      0
+  95%      0
+  98%      0
+  99%      0
+ 100%      7 (longest request)
+---
+
+---
+Test: nginx bot : Browser
+
+This is ApacheBench, Version 2.3 <$Revision: 1913912 $>
+Copyright 1996 Adam Twiss, Zeus Technology Ltd, http://www.zeustech.net/
+Licensed to The Apache Software Foundation, http://www.apache.org/
+
+Benchmarking localhost (be patient)
+Completed 100 requests
+Completed 200 requests
+Completed 300 requests
+Completed 400 requests
+Completed 500 requests
+Completed 600 requests
+Completed 700 requests
+Completed 800 requests
+Completed 900 requests
+Completed 1000 requests
+Finished 1000 requests
+
+
+Server Software:        nginx/1.22.1
+Server Hostname:        localhost
+Server Port:            8080
+
+Document Path:          /api/unprotected
+Document Length:        55 bytes
+
+Concurrency Level:      1
+Time taken for tests:   2.639 seconds
+Complete requests:      1000
+Failed requests:        0
+Total transferred:      484000 bytes
+HTML transferred:       55000 bytes
+Requests per second:    379.00 [#/sec] (mean)
+Time per request:       2.639 [ms] (mean)
+Time per request:       2.639 [ms] (mean, across all concurrent requests)
+Transfer rate:          179.14 [Kbytes/sec] received
+
+Connection Times (ms)
+              min  mean[+/-sd] median   max
+Connect:        0    0   0.0      0       0
+Processing:     2    3   0.9      2      14
+Waiting:        2    3   0.9      2      14
+Total:          2    3   0.9      2      14
+WARNING: The median and mean for the processing time are not within a normal deviation
+        These results are probably not that reliable.
+WARNING: The median and mean for the waiting time are not within a normal deviation
+        These results are probably not that reliable.
+WARNING: The median and mean for the total time are not within a normal deviation
+        These results are probably not that reliable.
+
+Percentage of the requests served within a certain time (ms)
+  50%      2
+  66%      3
+  75%      3
+  80%      3
+  90%      3
+  95%      4
+  98%      5
+  99%      6
+ 100%     14 (longest request)
+---
+
+---
+Test: nginx bot : Curl
+
+This is ApacheBench, Version 2.3 <$Revision: 1913912 $>
+Copyright 1996 Adam Twiss, Zeus Technology Ltd, http://www.zeustech.net/
+Licensed to The Apache Software Foundation, http://www.apache.org/
+
+Benchmarking localhost (be patient)
+Completed 100 requests
+Completed 200 requests
+Completed 300 requests
+Completed 400 requests
+Completed 500 requests
+Completed 600 requests
+Completed 700 requests
+Completed 800 requests
+Completed 900 requests
+Completed 1000 requests
+Finished 1000 requests
+
+
+Server Software:        nginx/1.22.1
+Server Hostname:        localhost
+Server Port:            8080
+
+Document Path:          /api/unprotected
+Document Length:        153 bytes
+
+Concurrency Level:      1
+Time taken for tests:   0.087 seconds
+Complete requests:      1000
+Failed requests:        0
+Non-2xx responses:      1000
+Total transferred:      303000 bytes
+HTML transferred:       153000 bytes
+Requests per second:    11435.24 [#/sec] (mean)
+Time per request:       0.087 [ms] (mean)
+Time per request:       0.087 [ms] (mean, across all concurrent requests)
+Transfer rate:          3383.67 [Kbytes/sec] received
+
+Connection Times (ms)
+              min  mean[+/-sd] median   max
+Connect:        0    0   0.0      0       0
+Processing:     0    0   0.0      0       1
+Waiting:        0    0   0.0      0       1
+Total:          0    0   0.0      0       1
+
+Percentage of the requests served within a certain time (ms)
+  50%      0
+  66%      0
+  75%      0
+  80%      0
+  90%      0
+  95%      0
+  98%      0
+  99%      0
+ 100%      1 (longest request)
+---
+
+---
+Test: nginx rate+bot : Browser
+
+This is ApacheBench, Version 2.3 <$Revision: 1913912 $>
+Copyright 1996 Adam Twiss, Zeus Technology Ltd, http://www.zeustech.net/
+Licensed to The Apache Software Foundation, http://www.apache.org/
+
+Benchmarking localhost (be patient)
+Completed 100 requests
+Completed 200 requests
+Completed 300 requests
+Completed 400 requests
+Completed 500 requests
+Completed 600 requests
+Completed 700 requests
+Completed 800 requests
+Completed 900 requests
+Completed 1000 requests
+Finished 1000 requests
+
+
+Server Software:        nginx/1.22.1
+Server Hostname:        localhost
+Server Port:            8080
+
+Document Path:          /api/unprotected
+Document Length:        55 bytes
+
+Concurrency Level:      1
+Time taken for tests:   0.145 seconds
+Complete requests:      1000
+Failed requests:        997
+   (Connect: 0, Receive: 0, Length: 997, Exceptions: 0)
+Non-2xx responses:      997
+Total transferred:      369345 bytes
+HTML transferred:       196574 bytes
+Requests per second:    6920.37 [#/sec] (mean)
+Time per request:       0.145 [ms] (mean)
+Time per request:       0.145 [ms] (mean, across all concurrent requests)
+Transfer rate:          2496.10 [Kbytes/sec] received
+
+Connection Times (ms)
+              min  mean[+/-sd] median   max
+Connect:        0    0   0.0      0       0
+Processing:     0    0   0.2      0       3
+Waiting:        0    0   0.2      0       3
+Total:          0    0   0.2      0       3
+
+Percentage of the requests served within a certain time (ms)
+  50%      0
+  66%      0
+  75%      0
+  80%      0
+  90%      0
+  95%      0
+  98%      0
+  99%      0
+ 100%      3 (longest request)
+---
+
+---
+Test: nginx rate+bot : Curl
+
+This is ApacheBench, Version 2.3 <$Revision: 1913912 $>
+Copyright 1996 Adam Twiss, Zeus Technology Ltd, http://www.zeustech.net/
+Licensed to The Apache Software Foundation, http://www.apache.org/
+
+Benchmarking localhost (be patient)
+Completed 100 requests
+Completed 200 requests
+Completed 300 requests
+Completed 400 requests
+Completed 500 requests
+Completed 600 requests
+Completed 700 requests
+Completed 800 requests
+Completed 900 requests
+Completed 1000 requests
+Finished 1000 requests
+
+
+Server Software:        nginx/1.22.1
+Server Hostname:        localhost
+Server Port:            8080
+
+Document Path:          /api/unprotected
+Document Length:        153 bytes
+
+Concurrency Level:      1
+Time taken for tests:   0.081 seconds
+Complete requests:      1000
+Failed requests:        0
+Non-2xx responses:      1000
+Total transferred:      303000 bytes
+HTML transferred:       153000 bytes
+Requests per second:    12310.57 [#/sec] (mean)
+Time per request:       0.081 [ms] (mean)
+Time per request:       0.081 [ms] (mean, across all concurrent requests)
+Transfer rate:          3642.68 [Kbytes/sec] received
+
+Connection Times (ms)
+              min  mean[+/-sd] median   max
+Connect:        0    0   0.0      0       0
+Processing:     0    0   0.0      0       0
+Waiting:        0    0   0.0      0       0
+Total:          0    0   0.0      0       0
+
+Percentage of the requests served within a certain time (ms)
+  50%      0
+  66%      0
+  75%      0
+  80%      0
+  90%      0
+  95%      0
+  98%      0
+  99%      0
+ 100%      0 (longest request)
+---
+
+---
+Test: caddy proxy : Baseline
+
+This is ApacheBench, Version 2.3 <$Revision: 1913912 $>
+Copyright 1996 Adam Twiss, Zeus Technology Ltd, http://www.zeustech.net/
+Licensed to The Apache Software Foundation, http://www.apache.org/
+
+Benchmarking localhost (be patient)
+Completed 100 requests
+Completed 200 requests
+Completed 300 requests
+Completed 400 requests
+Completed 500 requests
+Completed 600 requests
+Completed 700 requests
+Completed 800 requests
+Completed 900 requests
+Completed 1000 requests
+Finished 1000 requests
+
+
+Server Software:        Caddy
+Server Hostname:        localhost
+Server Port:            8081
+
+Document Path:          /api/unprotected
+Document Length:        55 bytes
+
+Concurrency Level:      1
+Time taken for tests:   2.667 seconds
+Complete requests:      1000
+Failed requests:        0
+Total transferred:      458000 bytes
+HTML transferred:       55000 bytes
+Requests per second:    374.92 [#/sec] (mean)
+Time per request:       2.667 [ms] (mean)
+Time per request:       2.667 [ms] (mean, across all concurrent requests)
+Transfer rate:          167.69 [Kbytes/sec] received
+
+Connection Times (ms)
+              min  mean[+/-sd] median   max
+Connect:        0    0   0.0      0       1
+Processing:     2    3   1.1      2      19
+Waiting:        2    2   1.1      2      18
+Total:          2    3   1.2      2      19
+
+Percentage of the requests served within a certain time (ms)
+  50%      2
+  66%      2
+  75%      3
+  80%      3
+  90%      4
+  95%      5
+  98%      6
+  99%      8
+ 100%     19 (longest request)
+---
+
+---
+Test: caddy proxy : Aj Rate
+
+This is ApacheBench, Version 2.3 <$Revision: 1913912 $>
+Copyright 1996 Adam Twiss, Zeus Technology Ltd, http://www.zeustech.net/
+Licensed to The Apache Software Foundation, http://www.apache.org/
+
+Benchmarking localhost (be patient)
+Completed 100 requests
+Completed 200 requests
+Completed 300 requests
+Completed 400 requests
+Completed 500 requests
+Completed 600 requests
+Completed 700 requests
+Completed 800 requests
+Completed 900 requests
+Completed 1000 requests
+Finished 1000 requests
+
+
+Server Software:        Caddy
+Server Hostname:        localhost
+Server Port:            8081
+
+Document Path:          /api/rate-limit
+Document Length:        55 bytes
+
+Concurrency Level:      1
+Time taken for tests:   21.115 seconds
+Complete requests:      1000
+Failed requests:        563
+   (Connect: 0, Receive: 0, Length: 563, Exceptions: 0)
+Non-2xx responses:      563
+Total transferred:      365499 bytes
+HTML transferred:       37547 bytes
+Requests per second:    47.36 [#/sec] (mean)
+Time per request:       21.115 [ms] (mean)
+Time per request:       21.115 [ms] (mean, across all concurrent requests)
+Transfer rate:          16.90 [Kbytes/sec] received
+
+Connection Times (ms)
+              min  mean[+/-sd] median   max
+Connect:        0    0   0.0      0       0
+Processing:    12   21   9.5     17     123
+Waiting:       12   21   9.4     17     123
+Total:         12   21   9.5     17     123
+
+Percentage of the requests served within a certain time (ms)
+  50%     17
+  66%     21
+  75%     25
+  80%     28
+  90%     35
+  95%     40
+  98%     42
+  99%     45
+ 100%    123 (longest request)
+---
+
+---
+Test: caddy proxy : Aj Bot (Browser)
+
+This is ApacheBench, Version 2.3 <$Revision: 1913912 $>
+Copyright 1996 Adam Twiss, Zeus Technology Ltd, http://www.zeustech.net/
+Licensed to The Apache Software Foundation, http://www.apache.org/
+
+Benchmarking localhost (be patient)
+Completed 100 requests
+Completed 200 requests
+Completed 300 requests
+Completed 400 requests
+Completed 500 requests
+Completed 600 requests
+Completed 700 requests
+Completed 800 requests
+Completed 900 requests
+Completed 1000 requests
+Finished 1000 requests
+
+
+Server Software:        Caddy
+Server Hostname:        localhost
+Server Port:            8081
+
+Document Path:          /api/bot-detect
+Document Length:        56 bytes
+
+Concurrency Level:      1
+Time taken for tests:   24.583 seconds
+Complete requests:      1000
+Failed requests:        0
+Total transferred:      438000 bytes
+HTML transferred:       56000 bytes
+Requests per second:    40.68 [#/sec] (mean)
+Time per request:       24.583 [ms] (mean)
+Time per request:       24.583 [ms] (mean, across all concurrent requests)
+Transfer rate:          17.40 [Kbytes/sec] received
+
+Connection Times (ms)
+              min  mean[+/-sd] median   max
+Connect:        0    0   0.0      0       0
+Processing:    14   24   9.0     21      76
+Waiting:       14   24   9.0     21      76
+Total:         14   25   9.0     21      77
+
+Percentage of the requests served within a certain time (ms)
+  50%     21
+  66%     26
+  75%     31
+  80%     33
+  90%     38
+  95%     43
+  98%     46
+  99%     50
+ 100%     77 (longest request)
+---
+
+---
+Test: caddy proxy : Aj Bot (Curl)
+
+This is ApacheBench, Version 2.3 <$Revision: 1913912 $>
+Copyright 1996 Adam Twiss, Zeus Technology Ltd, http://www.zeustech.net/
+Licensed to The Apache Software Foundation, http://www.apache.org/
+
+Benchmarking localhost (be patient)
+Completed 100 requests
+Completed 200 requests
+Completed 300 requests
+Completed 400 requests
+Completed 500 requests
+Completed 600 requests
+Completed 700 requests
+Completed 800 requests
+Completed 900 requests
+Completed 1000 requests
+Finished 1000 requests
+
+
+Server Software:        Caddy
+Server Hostname:        localhost
+Server Port:            8081
+
+Document Path:          /api/bot-detect
+Document Length:        24 bytes
+
+Concurrency Level:      1
+Time taken for tests:   14.201 seconds
+Complete requests:      1000
+Failed requests:        0
+Non-2xx responses:      1000
+Total transferred:      302000 bytes
+HTML transferred:       24000 bytes
+Requests per second:    70.42 [#/sec] (mean)
+Time per request:       14.201 [ms] (mean)
+Time per request:       14.201 [ms] (mean, across all concurrent requests)
+Transfer rate:          20.77 [Kbytes/sec] received
+
+Connection Times (ms)
+              min  mean[+/-sd] median   max
+Connect:        0    0   0.1      0       4
+Processing:     5   14   8.9     11      48
+Waiting:        4   13   8.5     10      48
+Total:          5   14   8.9     11      49
+
+Percentage of the requests served within a certain time (ms)
+  50%     11
+  66%     16
+  75%     18
+  80%     20
+  90%     29
+  95%     34
+  98%     37
+  99%     39
+ 100%     49 (longest request)
+---
+
+---
+Test: caddy proxy : Aj Rate+Bot (Browser)
+
+This is ApacheBench, Version 2.3 <$Revision: 1913912 $>
+Copyright 1996 Adam Twiss, Zeus Technology Ltd, http://www.zeustech.net/
+Licensed to The Apache Software Foundation, http://www.apache.org/
+
+Benchmarking localhost (be patient)
+Completed 100 requests
+Completed 200 requests
+Completed 300 requests
+Completed 400 requests
+Completed 500 requests
+Completed 600 requests
+Completed 700 requests
+Completed 800 requests
+Completed 900 requests
+Completed 1000 requests
+Finished 1000 requests
+
+
+Server Software:        Caddy
+Server Hostname:        localhost
+Server Port:            8081
+
+Document Path:          /api/rate-and-bot
+Document Length:        56 bytes
+
+Concurrency Level:      1
+Time taken for tests:   29.841 seconds
+Complete requests:      1000
+Failed requests:        393
+   (Connect: 0, Receive: 0, Length: 393, Exceptions: 0)
+Non-2xx responses:      393
+Total transferred:      390840 bytes
+HTML transferred:       49712 bytes
+Requests per second:    33.51 [#/sec] (mean)
+Time per request:       29.841 [ms] (mean)
+Time per request:       29.841 [ms] (mean, across all concurrent requests)
+Transfer rate:          12.79 [Kbytes/sec] received
+
+Connection Times (ms)
+              min  mean[+/-sd] median   max
+Connect:        0    0   0.1      0       2
+Processing:    18   30   9.4     28      80
+Waiting:       18   29   9.4     27      79
+Total:         18   30   9.4     28      80
+
+Percentage of the requests served within a certain time (ms)
+  50%     28
+  66%     33
+  75%     36
+  80%     39
+  90%     43
+  95%     45
+  98%     49
+  99%     60
+ 100%     80 (longest request)
+---
+
+---
+Test: caddy proxy : Aj Rate+Bot (Curl)
+
+This is ApacheBench, Version 2.3 <$Revision: 1913912 $>
+Copyright 1996 Adam Twiss, Zeus Technology Ltd, http://www.zeustech.net/
+Licensed to The Apache Software Foundation, http://www.apache.org/
+
+Benchmarking localhost (be patient)
+Completed 100 requests
+Completed 200 requests
+Completed 300 requests
+Completed 400 requests
+Completed 500 requests
+Completed 600 requests
+Completed 700 requests
+Completed 800 requests
+Completed 900 requests
+Completed 1000 requests
+Finished 1000 requests
+
+
+Server Software:        Caddy
+Server Hostname:        localhost
+Server Port:            8081
+
+Document Path:          /api/rate-and-bot
+Document Length:        40 bytes
+
+Concurrency Level:      1
+Time taken for tests:   13.627 seconds
+Complete requests:      1000
+Failed requests:        0
+Non-2xx responses:      1000
+Total transferred:      318000 bytes
+HTML transferred:       40000 bytes
+Requests per second:    73.39 [#/sec] (mean)
+Time per request:       13.627 [ms] (mean)
+Time per request:       13.627 [ms] (mean, across all concurrent requests)
+Transfer rate:          22.79 [Kbytes/sec] received
+
+Connection Times (ms)
+              min  mean[+/-sd] median   max
+Connect:        0    0   0.0      0       0
+Processing:     5   13   8.8     10      43
+Waiting:        3   13   8.6      9      40
+Total:          5   14   8.9     10      43
+
+Percentage of the requests served within a certain time (ms)
+  50%     10
+  66%     15
+  75%     17
+  80%     20
+  90%     30
+  95%     33
+  98%     35
+  99%     37
+ 100%     43 (longest request)
+---
+
+---
+Test: caddy rate
+
+This is ApacheBench, Version 2.3 <$Revision: 1913912 $>
+Copyright 1996 Adam Twiss, Zeus Technology Ltd, http://www.zeustech.net/
+Licensed to The Apache Software Foundation, http://www.apache.org/
+
+Benchmarking localhost (be patient)
+Completed 100 requests
+Completed 200 requests
+Completed 300 requests
+Completed 400 requests
+Completed 500 requests
+Completed 600 requests
+Completed 700 requests
+Completed 800 requests
+Completed 900 requests
+Completed 1000 requests
+Finished 1000 requests
+
+
+Server Software:        Caddy
+Server Hostname:        localhost
+Server Port:            8081
+
+Document Path:          /api/unprotected
+Document Length:        55 bytes
+
+Concurrency Level:      1
+Time taken for tests:   0.426 seconds
+Complete requests:      1000
+Failed requests:        980
+   (Connect: 0, Receive: 0, Length: 980, Exceptions: 0)
+Non-2xx responses:      980
+Total transferred:      236520 bytes
+HTML transferred:       1100 bytes
+Requests per second:    2347.57 [#/sec] (mean)
+Time per request:       0.426 [ms] (mean)
+Time per request:       0.426 [ms] (mean, across all concurrent requests)
+Transfer rate:          542.23 [Kbytes/sec] received
+
+Connection Times (ms)
+              min  mean[+/-sd] median   max
+Connect:        0    0   0.0      0       0
+Processing:     0    0   0.4      0       4
+Waiting:        0    0   0.4      0       4
+Total:          0    0   0.4      0       4
+
+Percentage of the requests served within a certain time (ms)
+  50%      0
+  66%      0
+  75%      0
+  80%      0
+  90%      0
+  95%      1
+  98%      2
+  99%      3
+ 100%      4 (longest request)
+---
+
+Warming up server on port 8081..... warm-up complete.
+---
+Test: caddy bot : Browser
+
+This is ApacheBench, Version 2.3 <$Revision: 1913912 $>
+Copyright 1996 Adam Twiss, Zeus Technology Ltd, http://www.zeustech.net/
+Licensed to The Apache Software Foundation, http://www.apache.org/
+
+Benchmarking localhost (be patient)
+Completed 100 requests
+Completed 200 requests
+Completed 300 requests
+Completed 400 requests
+Completed 500 requests
+Completed 600 requests
+Completed 700 requests
+Completed 800 requests
+Completed 900 requests
+Completed 1000 requests
+Finished 1000 requests
+
+
+Server Software:        Caddy
+Server Hostname:        localhost
+Server Port:            8081
+
+Document Path:          /api/unprotected
+Document Length:        55 bytes
+
+Concurrency Level:      1
+Time taken for tests:   2.830 seconds
+Complete requests:      1000
+Failed requests:        0
+Total transferred:      458000 bytes
+HTML transferred:       55000 bytes
+Requests per second:    353.39 [#/sec] (mean)
+Time per request:       2.830 [ms] (mean)
+Time per request:       2.830 [ms] (mean, across all concurrent requests)
+Transfer rate:          158.06 [Kbytes/sec] received
+
+Connection Times (ms)
+              min  mean[+/-sd] median   max
+Connect:        0    0   0.0      0       1
+Processing:     2    3   1.4      2      34
+Waiting:        2    2   1.3      2      33
+Total:          2    3   1.4      2      34
+
+Percentage of the requests served within a certain time (ms)
+  50%      2
+  66%      3
+  75%      3
+  80%      3
+  90%      4
+  95%      5
+  98%      6
+  99%      7
+ 100%     34 (longest request)
+---
+
+---
+Test: caddy bot : Curl
+
+This is ApacheBench, Version 2.3 <$Revision: 1913912 $>
+Copyright 1996 Adam Twiss, Zeus Technology Ltd, http://www.zeustech.net/
+Licensed to The Apache Software Foundation, http://www.apache.org/
+
+Benchmarking localhost (be patient)
+Completed 100 requests
+Completed 200 requests
+Completed 300 requests
+Completed 400 requests
+Completed 500 requests
+Completed 600 requests
+Completed 700 requests
+Completed 800 requests
+Completed 900 requests
+Completed 1000 requests
+Finished 1000 requests
+
+
+Server Software:        Caddy
+Server Hostname:        localhost
+Server Port:            8081
+
+Document Path:          /api/unprotected
+Document Length:        12 bytes
+
+Concurrency Level:      1
+Time taken for tests:   0.213 seconds
+Complete requests:      1000
+Failed requests:        0
+Non-2xx responses:      1000
+Total transferred:      262000 bytes
+HTML transferred:       12000 bytes
+Requests per second:    4696.09 [#/sec] (mean)
+Time per request:       0.213 [ms] (mean)
+Time per request:       0.213 [ms] (mean, across all concurrent requests)
+Transfer rate:          1201.54 [Kbytes/sec] received
+
+Connection Times (ms)
+              min  mean[+/-sd] median   max
+Connect:        0    0   0.0      0       0
+Processing:     0    0   0.1      0       3
+Waiting:        0    0   0.1      0       3
+Total:          0    0   0.1      0       3
+
+Percentage of the requests served within a certain time (ms)
+  50%      0
+  66%      0
+  75%      0
+  80%      0
+  90%      0
+  95%      0
+  98%      0
+  99%      1
+ 100%      3 (longest request)
+---
+
+Warming up server on port 8081..... warm-up complete.
+---
+Test: caddy rate+bot : Browser
+
+This is ApacheBench, Version 2.3 <$Revision: 1913912 $>
+Copyright 1996 Adam Twiss, Zeus Technology Ltd, http://www.zeustech.net/
+Licensed to The Apache Software Foundation, http://www.apache.org/
+
+Benchmarking localhost (be patient)
+Completed 100 requests
+Completed 200 requests
+Completed 300 requests
+Completed 400 requests
+Completed 500 requests
+Completed 600 requests
+Completed 700 requests
+Completed 800 requests
+Completed 900 requests
+Completed 1000 requests
+Finished 1000 requests
+
+
+Server Software:        Caddy
+Server Hostname:        localhost
+Server Port:            8081
+
+Document Path:          /api/unprotected
+Document Length:        55 bytes
+
+Concurrency Level:      1
+Time taken for tests:   0.389 seconds
+Complete requests:      1000
+Failed requests:        980
+   (Connect: 0, Receive: 0, Length: 980, Exceptions: 0)
+Non-2xx responses:      980
+Total transferred:      236520 bytes
+HTML transferred:       1100 bytes
+Requests per second:    2572.19 [#/sec] (mean)
+Time per request:       0.389 [ms] (mean)
+Time per request:       0.389 [ms] (mean, across all concurrent requests)
+Transfer rate:          594.12 [Kbytes/sec] received
+
+Connection Times (ms)
+              min  mean[+/-sd] median   max
+Connect:        0    0   0.0      0       0
+Processing:     0    0   0.3      0       3
+Waiting:        0    0   0.3      0       3
+Total:          0    0   0.3      0       3
+
+Percentage of the requests served within a certain time (ms)
+  50%      0
+  66%      0
+  75%      0
+  80%      0
+  90%      0
+  95%      1
+  98%      2
+  99%      2
+ 100%      3 (longest request)
+---
+
+---
+Test: caddy rate+bot : Curl
+
+This is ApacheBench, Version 2.3 <$Revision: 1913912 $>
+Copyright 1996 Adam Twiss, Zeus Technology Ltd, http://www.zeustech.net/
+Licensed to The Apache Software Foundation, http://www.apache.org/
+
+Benchmarking localhost (be patient)
+Completed 100 requests
+Completed 200 requests
+Completed 300 requests
+Completed 400 requests
+Completed 500 requests
+Completed 600 requests
+Completed 700 requests
+Completed 800 requests
+Completed 900 requests
+Completed 1000 requests
+Finished 1000 requests
+
+
+Server Software:        Caddy
+Server Hostname:        localhost
+Server Port:            8081
+
+Document Path:          /api/unprotected
+Document Length:        12 bytes
+
+Concurrency Level:      1
+Time taken for tests:   0.221 seconds
+Complete requests:      1000
+Failed requests:        0
+Non-2xx responses:      1000
+Total transferred:      262000 bytes
+HTML transferred:       12000 bytes
+Requests per second:    4517.04 [#/sec] (mean)
+Time per request:       0.221 [ms] (mean)
+Time per request:       0.221 [ms] (mean, across all concurrent requests)
+Transfer rate:          1155.73 [Kbytes/sec] received
+
+Connection Times (ms)
+              min  mean[+/-sd] median   max
+Connect:        0    0   0.0      0       0
+Processing:     0    0   0.1      0       2
+Waiting:        0    0   0.1      0       2
+Total:          0    0   0.1      0       2
+
+Percentage of the requests served within a certain time (ms)
+  50%      0
+  66%      0
+  75%      0
+  80%      0
+  90%      0
+  95%      0
+  98%      0
+  99%      0
+ 100%      2 (longest request)
+---
