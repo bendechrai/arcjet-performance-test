@@ -45,8 +45,9 @@ sudo apt update
 sudo apt install -y curl nodejs npm apache2-utils
 
 # Clone the repository
+git clone https://github.com/arcjet/arcjet-js-example.git
 git clone https://github.com/bendechrai/arcjet-performance-test
-cd arcjet-performance-test/nextjs-app
+cd arcjet-js-example
 npm install
 
 # Create a .env.local file and prompt for an ARCJET_KEY to inject
@@ -74,83 +75,4 @@ Save the output of these tests to a file (e.g., `results.txt`) and analyze the r
 
 ```sh
 ./parse_results.sh < results.txt
-```
-
-## Nginx and Caddy
-
-If you want to test with nginx or caddy, you will need to install the following:
-
-- nginx
-- caddy (with rate limiting)
-- go (for building Caddy)
-
-#### Debian install
-
-```sh
-sudo apt install -y nginx wget
-
-# Install a more recent version of Go (1.21)
-wget https://go.dev/dl/go1.21.3.linux-arm64.tar.gz
-sudo rm -rf /usr/local/go && sudo tar -C /usr/local -xzf go1.21.3.linux-arm64.tar.gz
-rm go1.21.3.linux-arm64.tar.gz
-
-# Add Go to PATH
-echo 'export PATH=$PATH:/usr/local/go/bin' >> ~/.bashrc
-source ~/.bashrc
-
-# Install xcaddy (Caddy builder)
-go install github.com/caddyserver/xcaddy/cmd/xcaddy@latest
-
-# Build Caddy with rate limiting module
-~/go/bin/xcaddy build --with github.com/mholt/caddy-ratelimit
-
-# Move the built Caddy to /usr/bin and set permissions
-sudo mv caddy /usr/bin/
-sudo chown root:root /usr/bin/caddy
-sudo chmod 755 /usr/bin/caddy
-
-# Set up Caddy as a service
-sudo groupadd --system caddy
-sudo useradd --system \
-    --gid caddy \
-    --create-home \
-    --home-dir /var/lib/caddy \
-    --shell /usr/sbin/nologin \
-    --comment "Caddy web server" \
-    caddy
-
-# Create Caddy service file
-cat << EOF | sudo tee /etc/systemd/system/caddy.service
-[Unit]
-Description=Caddy
-Documentation=https://caddyserver.com/docs/
-After=network.target network-online.target
-Requires=network-online.target
-
-[Service]
-User=caddy
-Group=caddy
-ExecStart=/usr/bin/caddy run --environ --config /etc/caddy/Caddyfile
-ExecReload=/usr/bin/caddy reload --config /etc/caddy/Caddyfile
-TimeoutStopSec=5s
-LimitNOFILE=1048576
-LimitNPROC=512
-PrivateTmp=true
-ProtectSystem=full
-AmbientCapabilities=CAP_NET_BIND_SERVICE
-
-[Install]
-WantedBy=multi-user.target
-EOF
-
-# Create Caddy config directory
-sudo mkdir -p /etc/caddy
-
-# Create a basic Caddyfile
-echo ":80" | sudo tee /etc/caddy/Caddyfile
-
-# Reload systemd, enable and start Caddy
-sudo systemctl daemon-reload
-sudo systemctl enable caddy
-sudo systemctl start caddy
 ```
