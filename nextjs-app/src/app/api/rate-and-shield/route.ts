@@ -1,12 +1,16 @@
 import { NextResponse } from "next/server";
-import arcjet, { detectBot } from "@arcjet/next";
+import arcjet, { fixedWindow, shield } from "@arcjet/next";
 
 const aj = arcjet({
   key: process.env.ARCJET_KEY!,
   rules: [
-    detectBot({
-      mode: "LIVE",
-      allow: [], // Allow no known bots
+    shield({
+      mode: "LIVE", // will block requests. Use "DRY_RUN" to log only
+    }),
+    fixedWindow({
+      mode: "LIVE", // will block requests. Use "DRY_RUN" to log only
+      window: 1, // 1 second fixed window
+      max: 20, // allow a maximum of 20 requests
     }),
   ],
 });
@@ -37,7 +41,7 @@ export async function GET(req: Request) {
   if (decision.isDenied()) {
     return NextResponse.json(
       { error: "Denied" },
-      { ...headers, status: 403 }
+      { ...headers, status: 429 }
     );
   }
 
@@ -49,3 +53,4 @@ export async function GET(req: Request) {
     { headers }
   );
 }
+

@@ -44,7 +44,7 @@ export async function GET(req: Request) {
   const decision = await aj.protect(req);
   if (decision.isDenied()) {
     return NextResponse.json(
-      { error: "Rate Limited or Bot Detected" },
+      { error: "Denied" },
       { ...headers, status: 403 }
     );
   }
@@ -53,7 +53,7 @@ export async function GET(req: Request) {
   const fibResult = calculateFibonacci(35);
 
   return NextResponse.json(
-    { message: "Bot-protected endpoint", fibResult },
+    { message: "Allowed", fibResult },
     { headers }
   );
 }

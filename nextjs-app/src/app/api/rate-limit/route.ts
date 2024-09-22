@@ -37,7 +37,7 @@ export async function GET(req: Request) {
   const decision = await aj.protect(req);
   if (decision.isDenied()) {
     return NextResponse.json(
-      { error: "Rate limited" },
+      { error: "Denied" },
       { ...headers, status: 429 }
     );
   }
@@ -46,7 +46,7 @@ export async function GET(req: Request) {
   const fibResult = calculateFibonacci(35);
 
   return NextResponse.json(
-    { message: "Rate-limited endpoint", fibResult },
+    { message: "Allowed", fibResult },
     { headers }
   );
 }

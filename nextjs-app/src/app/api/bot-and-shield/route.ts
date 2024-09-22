@@ -1,9 +1,12 @@
 import { NextResponse } from "next/server";
-import arcjet, { detectBot } from "@arcjet/next";
+import arcjet, { detectBot, shield } from "@arcjet/next";
 
 const aj = arcjet({
   key: process.env.ARCJET_KEY!,
   rules: [
+    shield({
+      mode: "LIVE",
+    }),
     detectBot({
       mode: "LIVE",
       allow: [], // Allow no known bots

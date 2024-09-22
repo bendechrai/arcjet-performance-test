@@ -46,7 +46,7 @@ sudo apt install -y curl nodejs npm apache2-utils
 
 # Clone the repository
 git clone https://github.com/bendechrai/arcjet-performance-test
-cd arcjet-performance-test
+cd arcjet-performance-test/nextjs-app
 npm install
 
 # Create a .env.local file and prompt for an ARCJET_KEY to inject
