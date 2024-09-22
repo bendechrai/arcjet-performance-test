@@ -6,31 +6,23 @@ UA_CURL="curl/7.88.1"
 
 # Function to run apache-bench tests
 run_test() {
-    local test_name=$1
-    local url=$2
-    # params 3 and beyond are optional headers
-    local header=""
-    for header in "${@:3}"; do
-        header="$header -H $header"
-    done
-    echo "---"
-    echo "Test: $test_name"
-    echo ""
-    printf "Running: ab -n 1000 -c 1 -H \"$header\" $url\n"
-    ab -n 1000 -c 1 -H "$header" $url
-    echo "---"
-    echo ""
+	local test_name=$1
+	local url=$2
+	local header=$3
+	echo "Test: $test_name"
+	ab -n 1000 -c 1 -H "$header" $url
+	echo ""
 }
 
 # Function to check service status
 check_service() {
-    local service_name=$1
-    local action=$2
-    sudo service $service_name $action
-    if [ $? -ne 0 ]; then
-        echo "Failed to $action $service_name. Exiting."
-        exit 1
-    fi
+	local service_name=$1
+	local action=$2
+	sudo service "$service_name" "$action"
+	if [[ $? -ne 0 ]]; then
+		echo "Failed to $action $service_name. Exiting."
+		exit 1
+	fi
 }
 
 # Pre-warm Next.js routes
@@ -49,8 +41,8 @@ run_test "Shield" "http://localhost:3000/api/shield" "User-Agent: $UA_BROWSER"
 run_test "Rate" "http://localhost:3000/api/rate-limit" "User-Agent: $UA_BROWSER"
 
 # Bot Detection
-run_test "Bot (BROWSER)" "http://localhost:3000/api/bot-detect" "User-Agent: $UA_BROWSER"
-run_test "Bot (CURL)" "http://localhost:3000/api/bot-detect" "User-Agent: $UA_CURL"
+run_test "Bot (USER)" "http://localhost:3000/api/bot-detect" "User-Agent: $UA_BROWSER"
+run_test "Bot (BOT)" "http://localhost:3000/api/bot-detect" "User-Agent: $UA_CURL"
 echo "Sleeping for 61 seconds to allow the bot detection cache to expire"
 sleep 61
 
@@ -58,17 +50,17 @@ sleep 61
 run_test "Shield + Rate" "http://localhost:3000/api/rate-and-shield" "User-Agent: $UA_BROWSER"
 
 # Shield + Bot
-run_test "Shield + Bot (BROWSER)" "http://localhost:3000/api/bot-and-shield" "User-Agent: $UA_BROWSER"
-run_test "Shield + Bot (CURL)" "http://localhost:3000/api/bot-and-shield" "User-Agent: $UA_CURL"
+run_test "Shield + Bot (USER)" "http://localhost:3000/api/bot-and-shield" "User-Agent: $UA_BROWSER"
+run_test "Shield + Bot (BOT)" "http://localhost:3000/api/bot-and-shield" "User-Agent: $UA_CURL"
 echo "Sleeping for 61 seconds to allow the bot detection cache to expire"
 sleep 61
 
 # Rate Limit + Bot Detection
-run_test "Rate + Bot (BROWSER)" "http://localhost:3000/api/rate-and-bot" "User-Agent: $UA_BROWSER"
-run_test "Rate + Bot (CURL)" "http://localhost:3000/api/rate-and-bot" "User-Agent: $UA_CURL"
+run_test "Rate + Bot (USER)" "http://localhost:3000/api/rate-and-bot" "User-Agent: $UA_BROWSER"
+run_test "Rate + Bot (BOT)" "http://localhost:3000/api/rate-and-bot" "User-Agent: $UA_CURL"
 echo "Sleeping for 61 seconds to allow the bot detection cache to expire"
 sleep 61
 
 # Shield + Rate + Bot
-run_test "Shield + Rate + Bot (BROWSER)" "http://localhost:3000/api/rate-and-bot-and-shield" "User-Agent: $UA_BROWSER"
-run_test "Shield + Rate + Bot (CURL)" "http://localhost:3000/api/rate-and-bot-and-shield" "User-Agent: $UA_CURL"
+run_test "Shield + Rate + Bot (USER)" "http://localhost:3000/api/rate-and-bot-and-shield" "User-Agent: $UA_BROWSER"
+run_test "Shield + Rate + Bot (BOT)" "http://localhost:3000/api/rate-and-bot-and-shield" "User-Agent: $UA_CURL"
