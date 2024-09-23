@@ -1,28 +1,14 @@
 # Next.js Performance Test
 
-This repository contains a Next.js application and various nginx configuration files for testing the performance of various rate limiting and bot detection configurations. The tests are designed to evaluate and compare the effectiveness and impact of different security measures.
+This repository contains a Next.js application and a script to test the performance of
+rate limiting and bot detection configurations.
 
 ## Overview
 
-This project aims to assess the performance implications of implementing security measures directly in a Next.js application using Arcjet versus traditional network-level tools like Nginx.
-
-## Configurations
-
-The repository includes multiple configurations:
-
-- **Nginx Baseline:** Nginx as a proxy without additional protections.
-- **Arcjet Rate Limiting:** Nginx as as a proxy without additional protections, calling an Arcjet protected route.
-- **Arcjet Bot Protection:** Nginx as as a proxy without additional protections, calling an Arcjet protected route.
-- **Nginx Rate Limiting:** Nginx as a proxy configured with rate limiting settings.
-- **Nginx Bot Protection:** Nginx as a proxy configured to block requests from known bots.
+This project aims to assess the performance implications of implementing security
+measures directly in a Next.js application using Arcjet.
 
 ## Getting Started
-
-In order to run this against the test environment, you will need to make sure you host close to our test services. These are located in the following locations:
-
-- AWS `us-east-1`
-- AWS `eu-west-1`
-- Fly.io `iad`
 
 We tested this by launching a `t4g.small` instance in AWS `us-east-1` running `Debian 12 (HVM) 64-bit (Arm)`.
 
@@ -33,9 +19,9 @@ We tested this by launching a `t4g.small` instance in AWS `us-east-1` running `D
 - npm
 - apache2-utils
 
-### Creating an Arcjet Account in the testing environment
+### Creating an Arcjet Account
 
-Head to https://app.arcjettest.com/ and create an account, add a new site, and get your SDK key.
+Head to https://app.arcjet.com/ and create an account, add a new site, and get your SDK key.
 
 #### Debian Script
 
