@@ -1,16 +1,21 @@
 # Next.js Performance Test
 
 This repository contains a Next.js application and a script to test the performance of
-rate limiting and bot detection configurations.
-
-## Overview
-
-This project aims to assess the performance implications of implementing security
-measures directly in a Next.js application using Arcjet.
+shield, rate limiting, and bot detection configurations.
 
 ## Getting Started
 
-We tested this by launching a `t4g.small` instance in AWS `us-east-1` running `Debian 12 (HVM) 64-bit (Arm)`.
+We tested this by launching a `t4g.2xlarge` instance in AWS `us-east-1` running
+`Debian 12 (HVM) 64-bit (Arm)`. The test script was run locally on the same instance as
+the running Next.js application.
+
+We did test the performance difference of running two identical instances, one to run the
+test, and the other to host the web application, and found that there was no significant
+overall impact on accuracy or performance. Half of the tests showed slight improvements
+with the two-server setup, while the other half showed slightly worse performance. These
+variations are likely due to normal fluctuations in network and system performance rather
+than a systematic difference between the testing methods. The outcome of this could
+conceivably be different if the test server was less powerful than the instance type used.
 
 ### Prerequisites
 
